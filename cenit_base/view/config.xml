@@ -83,6 +83,11 @@
                                        class="oe_inline" />
                                 <label for="module_cenit_asana" />
                             </div>
+                            <div name="module_cenit_base">
+                                <field name="module_cenit_base"
+                                       class="oe_inline" />
+                                <label for="module_cenit_base" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />

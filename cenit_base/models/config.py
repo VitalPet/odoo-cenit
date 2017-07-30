@@ -85,6 +85,10 @@ class CenitSettings (models.TransientModel):
         help=""
     )
 
+    module_cenit_base = fields.Boolean('VetZip 10',
+        help=""
+    )
+
     ############################################################################
     # Default values getters
     ############################################################################
@@ -248,6 +252,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'twilio'})
             if obj.module_cenit_twitter:
                 installer.install_collection({'name': 'twitter'})
+            if obj.module_cenit_base:
+                installer.install_collection({'name': 'vetzip10'})
 
 
 class CenitAccountSettings(models.TransientModel):
