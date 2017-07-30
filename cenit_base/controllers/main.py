@@ -7,6 +7,7 @@ from odoo import http
 from odoo import SUPERUSER_ID
 from odoo.http import request
 from odoo.modules.registry import Registry
+from odoo import fields, models, api, _
 
 
 _logger = logging.getLogger(__name__)
