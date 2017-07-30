@@ -26,7 +26,7 @@ import logging
 import requests
 import simplejson
 
-from openerp import models, fields, exceptions
+from odoo import models, fields, api, _, exceptions
 
 
 _logger = logging.getLogger(__name__)

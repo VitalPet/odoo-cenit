@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
 
         <menuitem id="menu_cenit_collections" name="Collections"
@@ -216,4 +216,4 @@
                   action="action_cenit_import_datatype"/>
 
     </data>
-</openerp>
+</odoo>

@@ -22,7 +22,7 @@
 #
 #
 
-from openerp import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions
 
 from datetime import datetime
 
@@ -761,7 +761,7 @@ class CenitFlow (models.Model):
 
         data_types = set()
         for flow in flows:
-            dts = flow._get_data_types()
+            dts = flow._get_data_types(None)
             for dt in dts:
                 data_types.add(dt)
         for dt in data_types:
@@ -964,7 +964,7 @@ class CenitFlow (models.Model):
 #     def local_post(self,00 cr, uid, obj, data, context=None):
 #         db = context.get('partner_db')
 #         if db:
-#             registry = openerp.modules.registry.RegistryManager.get(db)
+#             registry = odoo.modules.registry.RegistryManager.get(db)
 #             with registry.cursor() as rcr:
 #                 uids = registry['res.users'].search(rcr, SI,
 #                                                 [('oauth_uid', '!=', False)])

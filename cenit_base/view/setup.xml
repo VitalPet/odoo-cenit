@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
 
         <menuitem id="menu_cenit_connectors" name="API Connectors"
@@ -361,4 +361,4 @@
             action="action_cenit_translator" />
 
     </data>
-</openerp>
+</odoo>
