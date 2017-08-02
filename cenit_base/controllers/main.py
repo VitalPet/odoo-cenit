@@ -58,6 +58,8 @@ class WebhookController(http.Controller):
                 p = inflect.engine()
                 flow_model = env['cenit.flow']
                 context = {'sender': 'client', 'action': action}
+                _logger.error("inflect.engine: %s", p)
+                _logger.error("root: %s", root)
 
                 if root is None:
                     for root, data in request.jsonrequest.items():
@@ -67,7 +69,10 @@ class WebhookController(http.Controller):
                             status_code = 200
                 else:
                     root = p.singular_noun(root) or root
+                    
+                    _logger.error("root 1: %s", root)
                     rc = flow_model.receive( root, request.jsonrequest)
+                    _logger.error("flow_model 1: %s", rc)
                     if rc:
                         status_code = 200
             else:

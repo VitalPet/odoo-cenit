@@ -739,6 +739,7 @@ class CenitFlow (models.Model):
         rc = []
         domain = [("schema.slug", "=", model)]
         objs = self.search(domain)
+        _logger.error("domain 1: %s : %s", domain, objs)
         if objs:
             rc = [x for x in objs if
                   ((x._get_direction()[0] == purpose) and x.enabled)]
@@ -754,6 +755,7 @@ class CenitFlow (models.Model):
         res = False
         context = self.env.context.copy() or {}
         flows = self.find(model.lower(), 'receive')
+        _logger.error("flows 1: %s", flows)
 
         if not flows:
             return res
