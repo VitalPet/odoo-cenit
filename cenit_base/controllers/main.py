@@ -21,10 +21,12 @@ class WebhookController(http.Controller):
     def cenit_post(self, action, root=None):
         status_code = 400
         environ = request.httprequest.headers.environ.copy()
+        _logger.error(environ)
 
         key = environ.get('HTTP_X_USER_ACCESS_KEY', False)
         token = environ.get('HTTP_X_USER_ACCESS_TOKEN', False)
         db_name = environ.get('HTTP_TENANT_DB', False)
+        _logger.error("keys: %s - %s - %s", key, token, db_name)
 
         if not db_name:
             host = environ.get('HTTP_HOST', "")
