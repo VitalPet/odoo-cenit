@@ -22,6 +22,9 @@ class WebhookController(http.Controller):
         status_code = 400
         environ = request.httprequest.headers.environ.copy()
         _logger.error(environ)
+        _logger.error(request.httprequest.environ)
+        _logger.error(request.httprequest)
+        
 
         key = environ.get('HTTP_X_USER_ACCESS_KEY', False)
         token = environ.get('HTTP_X_USER_ACCESS_TOKEN', False)
