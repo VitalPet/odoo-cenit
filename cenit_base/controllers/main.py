@@ -22,11 +22,11 @@ class WebhookController(http.Controller):
         status_code = 400
         environ = request.httprequest.headers.environ.copy()
         _logger.error(environ)
-        _logger.error(request.httprequest.environ)
-        _logger.error(request.httprequest)
-        key = request.params.get('X_USER_ACCESS_KEY', False)
-        token = request.params.get('X_USER_ACCESS_TOKEN', False)
-        db_name = request.params.get('TENANT_DB', False)
+        _logger.error(request.httprequest.query_string)
+        key = request.params.get('X_USER_ACCESS_KEY')
+        token = request.params.get('X_USER_ACCESS_TOKEN')
+        db_name = request.params.get('TENANT_DB')
+        _logger.error("keys: %s - %s - %s", key, token, db_name)
 
         key = environ.get('HTTP_X_USER_ACCESS_KEY', key)
         token = environ.get('HTTP_X_USER_ACCESS_TOKEN', token)
