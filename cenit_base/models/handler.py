@@ -165,6 +165,8 @@ class CenitHandler(models.TransientModel):
                     continue
 
                 obj = model_obj.create(vals)
+                _logger.error("PIMS Logging: Create : %s - %s", match.model.model, obj.id)
+                self.log('Create', match.model.id,record_id=obj.id)
 
             obj_ids.append(obj.id)
         return obj_ids
@@ -187,6 +189,8 @@ class CenitHandler(models.TransientModel):
                 vals = self.trim(match, obj, vals)
                 obj.write(vals)
                 obj_ids.append(obj.id)
+                _logger.error("PIMS Logging: Update : %s - %s", match.model.model, obj.id)
+                self.log('Update', match.model.id,record_id=obj.id)
 
         return obj_ids
 
@@ -210,3 +214,14 @@ class CenitHandler(models.TransientModel):
             obj_ids.extend(ids)
 
         return obj_ids
+
+
+    @api.model
+    def log(self, action, model, status='Success', record_id=False, msg=''):
+        res = self.env['pims.sync.log'].create({'action': action,
+                                                'model': model,
+                                                'status': status,
+                                                'record_global_id': record_id,
+                                                'msg': msg,
+                                                  })
+        return res
