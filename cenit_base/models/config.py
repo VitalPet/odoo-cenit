@@ -85,7 +85,7 @@ class CenitSettings (models.TransientModel):
         help=""
     )
 
-    module_cenit_base = fields.Boolean('VetZip 10/VitalPet',
+    module_cenit_base = fields.Boolean('VetZip 10',
         help=""
     )
 
@@ -254,7 +254,7 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'twitter'})
             if obj.module_cenit_base:
                 installer.install_collection({'name': 'vetzip10'})
-                installer.install_collection({'name': 'vitalpet'})
+                # installer.install_collection({'name': 'vitalpet'})
 
 
 class CenitAccountSettings(models.TransientModel):
