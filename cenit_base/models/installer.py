@@ -58,6 +58,7 @@ class CollectionInstaller(models.TransientModel):
                       (x['namespace'] == nam.name) and 'snippet' in x)
 
             for schema in values:
+                _logger.error("schema : %s", schema)
                 schema_code = self.get_snippetcode(schema['snippet']['name'], snippets_list)
 
                 sch_data = {
