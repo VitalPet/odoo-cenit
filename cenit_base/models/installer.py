@@ -35,6 +35,7 @@ class CollectionInstaller(models.TransientModel):
 
     @api.model
     def _install_namespaces(self, values, data_types_list, snippets_list):
+        _logger.error("data_types_list : %s", data_types_list)
         _logger.error("snippets_list : %s", snippets_list)
         namespace_pool = self.env['cenit.namespace']
         schema_pool = self.env['cenit.schema']
@@ -54,9 +55,12 @@ class CollectionInstaller(models.TransientModel):
             else:
                 nam = candidates[0]
                 nam.with_context(local=True).write(namespace_data)
-
-            values = (x for x in data_types_list if
-                      (x['namespace'] == nam.name) and 'snippet' in x)
+            
+            values = []
+            for x in data_types_list:
+                if ((x['namespace'] == nam.name) and 'snippet' in x):
+                    _logger.error("data_type : %s", x)
+                    values.append(x)
 
             for schema in values:
                 _logger.error("schema : %s", schema)
@@ -628,7 +632,7 @@ class CollectionInstaller(models.TransientModel):
         self._install_namespaces(data.get('namespaces', []),
                                  data.get('data_types', []),
                                  data.get('snippets', []))
-
+        
         for key in keys:
             values = data.get(key, {})
             {
