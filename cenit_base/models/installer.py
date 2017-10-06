@@ -61,6 +61,7 @@ class CollectionInstaller(models.TransientModel):
             for schema in values:
                 _logger.error("schema : %s", schema)
                 schema_code = self.get_snippetcode(schema['snippet']['id'], snippets_list)
+                _logger.error("schema_code : %s", schema_code)
 
                 sch_data = {
                     'cenitID': schema.get('id'),
