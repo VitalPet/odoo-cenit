@@ -459,6 +459,7 @@ class CollectionInstaller(models.TransientModel):
                     ('namespace', '=', namesp[0].id)
                 ]
                 candidates = sch_pool.search(domain)
+                schema_id = None
                 if candidates:
                     schema_id = candidates[0].id
 
