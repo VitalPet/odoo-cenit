@@ -35,6 +35,7 @@ class CollectionInstaller(models.TransientModel):
 
     @api.model
     def _install_namespaces(self, values, data_types_list, snippets_list):
+        _logger.error("snippets_list : %s", snippets_list)
         namespace_pool = self.env['cenit.namespace']
         schema_pool = self.env['cenit.schema']
 
@@ -59,7 +60,7 @@ class CollectionInstaller(models.TransientModel):
 
             for schema in values:
                 _logger.error("schema : %s", schema)
-                schema_code = self.get_snippetcode(schema['snippet']['name'], snippets_list)
+                schema_code = self.get_snippetcode(schema['snippet']['id'], snippets_list)
 
                 sch_data = {
                     'cenitID': schema.get('id'),
@@ -649,7 +650,7 @@ class CollectionInstaller(models.TransientModel):
         found = False
         i = 0
         while (i < len(list) and not found):
-            if list[i]['name'] == name:
+            if list[i]['id'] == name:
                 code = list[i]['code']
                 found = True
             else:
