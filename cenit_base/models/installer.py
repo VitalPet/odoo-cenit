@@ -594,27 +594,35 @@ class CollectionInstaller(models.TransientModel):
     def install_collection(self, params=None):
         cenit_api = self.env['cenit.api']
 
-        if params:
-            key = params.keys()[0]
-            if key == 'id':
-                path = "/setup/collection"
-                path = "%s/%s" % (path, params.get(key))
-            else:
-                path = "/setup/collection?"
-                path = "%s%s=%s" % (path, key, params.get(key))
+        path = "/setup/collection"
+        path = "%s/%s" % (path, '593e12ea41678653380001b4')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):
             rc = rc[0]
         data = rc
-        if 'collections' in data:
-            _logger.info('========================== data ============================')
-            _logger.info(data)
-            data = data['collections'][0]
-
-        if not params:
-                raise exceptions.ValidationError(
-                    "Cenit failed to install the collection")
+        if 'collections' not in data:
+            if params:
+                key = params.keys()[0]
+                if key == 'id':
+                    path = "/setup/collection"
+                    path = "%s/%s" % (path, params.get(key))
+                else:
+                    path = "/setup/collection?"
+                    path = "%s%s=%s" % (path, key, params.get(key))
+    
+            rc = cenit_api.get(path)
+            if isinstance(rc, list):
+                rc = rc[0]
+            data = rc
+            if 'collections' in data:
+                _logger.info('========================== data ============================')
+                _logger.info(data)
+                data = data['collections'][0]
+    
+            if not params:
+                    raise exceptions.ValidationError(
+                        "Cenit failed to install the collection")
 
         self.install_common_data(data)
 
