@@ -601,7 +601,9 @@ class CollectionInstaller(models.TransientModel):
         if isinstance(rc, list):
             rc = rc[0]
         data = rc
-        if 'collections' not in data:
+        _logger.info('========================== data by id ============================')
+        _logger.info(data)
+        if 'id' not in data:
             if params:
                 key = params.keys()[0]
                 if key == 'id':
