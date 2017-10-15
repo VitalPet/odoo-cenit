@@ -608,6 +608,8 @@ class CollectionInstaller(models.TransientModel):
             rc = rc[0]
         data = rc
         if 'collections' in data:
+            _logger.info('========================== data ============================')
+            _logger.info(data)
             data = data['collections'][0]
 
         if not params:
