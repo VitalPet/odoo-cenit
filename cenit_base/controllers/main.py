@@ -22,7 +22,8 @@ class WebhookController(http.Controller):
         status_code = 400
         environ = request.httprequest.headers.environ.copy()
         _logger.error(environ)
-        _logger.error(request.httprequest.query_string)
+        _logger.error('***************************************************')
+        _logger.error(request.jsonrequest)
         params = {}
         qr = request.httprequest.query_string.split('&')
         for q in qr:
