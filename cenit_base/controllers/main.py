@@ -70,8 +70,8 @@ class WebhookController(http.Controller):
                         root = p.singular_noun(root) or root
                         _logger.error("new root: %s", root)
                         data = literal_eval(data)
-                        for r in data:
-                            record = json.loads(r)
+                        for record in data:
+                            #record = json.loads(r)
                             _logger.error("new record: %s", record)
                             rc = flow_model.receive(root, record)
                             if rc:
