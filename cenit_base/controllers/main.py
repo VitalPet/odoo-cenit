@@ -62,11 +62,11 @@ class WebhookController(http.Controller):
                 _logger.error("inflect.engine: %s", p)
                 _logger.error("root: %s", root)
                 
-                data = request.jsonrequest.get(root, False)
-                if isinstance(data, list): # root is None:
-                    for record in data:
+                
+                if request.jsonrequest: # root is None:
+                    for root, data in request.jsonrequest.items():
                         root = p.singular_noun(root) or root
-                        rc = flow_model.receive(root, record)
+                        rc = flow_model.receive(root, data)
                         if rc:
                             status_code = 200
                 else:
