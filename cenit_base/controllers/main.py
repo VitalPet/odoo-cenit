@@ -66,9 +66,10 @@ class WebhookController(http.Controller):
                 if request.jsonrequest: # root is None:
                     for root, data in request.jsonrequest.items():
                         root = p.singular_noun(root) or root
-                        rc = flow_model.receive(root, data)
-                        if rc:
-                            status_code = 200
+                        for record in data:
+                            rc = flow_model.receive(root, record)
+                            if rc:
+                                status_code = 200
                 else:
                     root = p.singular_noun(root) or root
                     
