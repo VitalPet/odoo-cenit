@@ -2,6 +2,8 @@
 
 import logging
 import inflect
+from ast import literal_eval
+import json
 
 from odoo import http
 from odoo import SUPERUSER_ID
@@ -67,7 +69,9 @@ class WebhookController(http.Controller):
                     for root, data in request.jsonrequest.items():
                         root = p.singular_noun(root) or root
                         _logger.error("new root: %s", root)
-                        for record in data:
+                        data = literal_eval(data)
+                        for r in data:
+                            record = json.loads(r)
                             _logger.error("new record: %s", record)
                             rc = flow_model.receive(root, record)
                             if rc:
