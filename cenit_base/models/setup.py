@@ -766,6 +766,7 @@ class CenitFlow (models.Model):
             dts = flow._get_data_types(None)
             for dt in dts:
                 data_types.add(dt)
+        _logger.error("data_types 2: %s", data_types)
         for dt in data_types:
             klass = self.env[dt.model.model]
 
