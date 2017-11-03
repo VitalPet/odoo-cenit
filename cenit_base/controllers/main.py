@@ -67,8 +67,8 @@ class WebhookController(http.Controller):
                     for root, data in request.jsonrequest.items():
                         root = p.singular_noun(root) or root
                         _logger.error("new root: %s", root)
-                        _logger.error("new data: %s", data)
                         for record in data:
+                            _logger.error("new record: %s", record)
                             rc = flow_model.receive(root, record)
                             if rc:
                                 status_code = 200

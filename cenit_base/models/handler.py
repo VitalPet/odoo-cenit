@@ -52,6 +52,7 @@ class CenitHandler(models.TransientModel):
             to_search = []
             for entry in fp:
                 checker = self._get_checker(model_obj, entry.name)
+                _logger.error("new params: %s - %s", params, entry.value)
                 value = checker(params.get(entry.value, False))
 
                 if not value:
