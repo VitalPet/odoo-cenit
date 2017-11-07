@@ -71,8 +71,6 @@ class WebhookController(http.Controller):
                         _logger.error("new root: %s", root)
                         if isinstance(data, basestring):
                             data = literal_eval(data)
-                        else:
-                            data = json.loads(data)
                         for record in data:
                             # record = json.loads(record)
                             _logger.error("new record: %s", record)
