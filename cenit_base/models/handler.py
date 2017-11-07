@@ -47,7 +47,7 @@ class CenitHandler(models.TransientModel):
     def find(self, match, params):
         model_obj = self.env[match.model.model]
 
-        fp = [str(x) for x in match.lines if x.primary] or False
+        fp = [x for x in match.lines if x.primary] or False
         if fp:
             to_search = []
             for entry in fp:
