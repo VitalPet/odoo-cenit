@@ -166,6 +166,8 @@ class CenitHandler(models.TransientModel):
                     continue
 
                 obj = model_obj.create(vals)
+                if not obj:
+                    continue
                 _logger.error("PIMS Logging: Create : %s - %s", match.model.model, obj.id)
                 self.log('Create', match.model.id,record_id=obj.id)
 

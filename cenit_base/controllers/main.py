@@ -24,7 +24,7 @@ class WebhookController(http.Controller):
         status_code = 400
         environ = request.httprequest.headers.environ.copy()
         _logger.error(environ)
-        _logger.error('***************************************************')
+        _logger.error('Initial data')
         _logger.error(request.jsonrequest)
         params = {}
         qr = request.httprequest.query_string.split('&')
@@ -69,7 +69,8 @@ class WebhookController(http.Controller):
                     for root, data in request.jsonrequest.items():
                         root = p.singular_noun(root) or root
                         _logger.error("new root: %s", root)
-                        data = literal_eval(data)
+                        if isinstance(data, basestring):
+                            data = literal_eval(data)
                         for record in data:
                             #record = json.loads(r)
                             _logger.error("new record: %s", record)
