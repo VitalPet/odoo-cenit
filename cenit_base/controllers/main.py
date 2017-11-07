@@ -74,9 +74,9 @@ class WebhookController(http.Controller):
                             data = literal_eval(data)
                             is_data_str = True
                         for record in data:
-                            if is_data_str:
-                                _logger.error("new record: %s", record)
-                                record = literal_eval(record)
+                            #if is_data_str:
+                            _logger.error("new record: %s", record)
+                            #    record = literal_eval(record)
                             _logger.error("new record: %s", record)
                             rc = flow_model.receive(root, record)
                             if rc:
