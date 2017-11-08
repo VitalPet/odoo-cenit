@@ -9,6 +9,7 @@ from odoo import http
 from odoo import SUPERUSER_ID
 from odoo.http import request
 from odoo.modules.registry import Registry
+from odoo.tools.safe_eval import safe_eval
 from odoo import fields, models, api, _
 
 
@@ -71,11 +72,11 @@ class WebhookController(http.Controller):
                         _logger.error("new root: %s", root)
                         is_data_str = False
                         if isinstance(data, basestring):
-                            data = literal_eval(data)
+                            data = safe_eval(data)
                             is_data_str = True
                         for record in data:
                             #if is_data_str:
-                            _logger.error("new record: %s", record)
+                            #_logger.error("new record: %s", record)
                             #    record = literal_eval(record)
                             _logger.error("new record: %s", record)
                             rc = flow_model.receive(root, record)
