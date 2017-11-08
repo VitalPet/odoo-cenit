@@ -72,7 +72,7 @@ class WebhookController(http.Controller):
                         _logger.error("new root: %s", root)
                         is_data_str = False
                         if isinstance(data, basestring):
-                            data = safe_eval(data)
+                            data = json.loads(data)
                             is_data_str = True
                         for record in data:
                             #if is_data_str:
