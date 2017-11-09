@@ -595,7 +595,10 @@ class CollectionInstaller(models.TransientModel):
         cenit_api = self.env['cenit.api']
 
         path = "/setup/collection"
-        path = "%s/%s" % (path, '593e12ea41678653380001b4')
+        if params and params.get('name', False) == 'vetzip10':
+            path = "%s/%s" % (path, '593e12ea41678653380001b4')
+        elif params and params.get('name', False) == 'openvpms':
+            path = "%s/%s" % (path, '5a0413d40bf67e06f3000aff')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):

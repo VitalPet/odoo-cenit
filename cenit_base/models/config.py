@@ -93,6 +93,21 @@ class CenitSettings (models.TransientModel):
         help=""
     )
 
+
+    @api.multi
+    def set_default_cenit_vetzip(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_vetzip', config.cenit_vetzip)
+            
+    @api.multi
+    def set_default_cenit_openvpms(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_openvpms', config.cenit_openvpms)
+
     ############################################################################
     # Default values getters
     ############################################################################
