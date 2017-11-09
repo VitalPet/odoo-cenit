@@ -85,7 +85,11 @@ class CenitSettings (models.TransientModel):
         help=""
     )
 
-    module_cenit_base = fields.Boolean('VetZip 10',
+    cenit_vetzip = fields.Boolean('VetZip 10',
+        help=""
+    )
+
+    cenit_openvpms = fields.Boolean('OpenVPMS',
         help=""
     )
 
@@ -252,9 +256,10 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'twilio'})
             if obj.module_cenit_twitter:
                 installer.install_collection({'name': 'twitter'})
-            if obj.module_cenit_base:
+            if obj.cenit_vetzip:
                 installer.install_collection({'name': 'vetzip10'})
-                # installer.install_collection({'name': 'vitalpet'})
+            if obj.cenit_openvpms:
+                installer.install_collection({'name': 'openvpms'})
 
 
 class CenitAccountSettings(models.TransientModel):
