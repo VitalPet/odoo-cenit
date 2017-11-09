@@ -83,10 +83,15 @@
                                        class="oe_inline" />
                                 <label for="module_cenit_asana" />
                             </div>
-                            <div name="module_cenit_base">
-                                <field name="module_cenit_base"
+                            <div name="cenit_vetzip">
+                                <field name="cenit_vetzip"
                                        class="oe_inline" />
-                                <label for="module_cenit_base" />
+                                <label for="cenit_vetzip" />
+                            </div>
+                            <div name="cenit_openvpms">
+                                <field name="cenit_openvpms"
+                                       class="oe_inline" />
+                                <label for="cenit_openvpms" />
                             </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
