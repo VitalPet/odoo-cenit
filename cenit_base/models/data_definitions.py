@@ -538,11 +538,9 @@ class CenitDataType(models.Model):
             elif isinstance(domain[0], list):
                 domain = domain[0]
             domain.append(("id", "=", obj.id))
+            domain.append( ('active','=', False))
             _logger.info("\n\nensure_object: %s\n", domain)
-            match = obj.search(domain) or False
-            if not match:
-                domain.append(("active", "=", False))
-                match = obj.search(domain) or False
+            match = self.env[obj._name].search(domain) or False
         _logger.info("\n\nensure_object match: %s\n", match)
         return match
 
