@@ -868,6 +868,7 @@ class CenitFlow (models.Model):
 
     @api.model
     def send(self, obj, flow_id):
+        _logger.info("\n\nPushing send : %s\n", obj)
         flow = self.browse(flow_id)
         if not (flow and flow.enabled):
             return False
