@@ -93,6 +93,10 @@ class CenitSettings (models.TransientModel):
         help=""
     )
 
+    cenit_ultipro = fields.Boolean('UltiPro',
+        help=""
+    )
+
 
     @api.multi
     def set_default_cenit_vetzip(self):
@@ -107,6 +111,13 @@ class CenitSettings (models.TransientModel):
         Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
         for config in self:
             Values.set_default('cenit.hub.settings', 'cenit_openvpms', config.cenit_openvpms)
+            
+    @api.multi
+    def set_default_cenit_ultipro(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_ultipro', config.cenit_ultipro)
 
     ############################################################################
     # Default values getters
@@ -275,6 +286,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'vetzip10'})
             if obj.cenit_openvpms:
                 installer.install_collection({'name': 'openvpms'})
+            if obj.cenit_ultipro:
+                installer.install_collection({'name': 'ultipro'})
 
 
 class CenitAccountSettings(models.TransientModel):

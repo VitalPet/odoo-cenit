@@ -93,6 +93,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_openvpms" />
                             </div>
+                            <div name="cenit_ultipro">
+                                <field name="cenit_ultipro"
+                                       class="oe_inline" />
+                                <label for="cenit_ultipro" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />

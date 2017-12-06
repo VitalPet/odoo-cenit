@@ -599,6 +599,8 @@ class CollectionInstaller(models.TransientModel):
             path = "%s/%s" % (path, '593e12ea41678653380001b4')
         elif params and params.get('name', False) == 'openvpms':
             path = "%s/%s" % (path, '5a0413d40bf67e06f3000aff')
+        elif params and params.get('name', False) == 'ultipro':
+            path = "%s/%s" % (path, '5a283a150bf67e067f000002')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):
