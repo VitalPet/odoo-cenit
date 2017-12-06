@@ -385,16 +385,17 @@ class CollectionInstaller(models.TransientModel):
                 })
 
             # Updating webhook
-            hook = flow.get('webhook', {})
-            namesp = names_pool.search([('name', '=', hook.get('namespace'))])
-            domain = [('name', '=', hook.get('name')),
-                      ('namespace', '=', namesp[0].id)]
-            rc = hook_pool.search(domain)
-            if not rc:
-                continue
-            flow_data.update({
-                'webhook': rc[0].id
-            })
+            if 'webhook' in flow:
+                hook = flow.get('webhook', {})
+                namesp = names_pool.search([('name', '=', hook.get('namespace'))])
+                domain = [('name', '=', hook.get('name')),
+                          ('namespace', '=', namesp[0].id)]
+                rc = hook_pool.search(domain)
+                if not rc:
+                    continue
+                flow_data.update({
+                    'webhook': rc[0].id
+                })
 
             # Updating role
             if 'connection_role' in flow:
