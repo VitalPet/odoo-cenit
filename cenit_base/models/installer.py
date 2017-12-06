@@ -387,6 +387,8 @@ class CollectionInstaller(models.TransientModel):
             # Updating webhook
             hook = flow.get('webhook', {})
             _logger.info('========================== hook: %s', hook)
+            if 'resource' in hook:
+                hook = hook.get('resource')
             namesp = names_pool.search([('name', '=', hook.get('namespace'))])
             if namesp:
                 domain = [('name', '=', hook.get('name')),
