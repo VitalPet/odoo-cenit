@@ -385,9 +385,10 @@ class CollectionInstaller(models.TransientModel):
                 })
 
             # Updating webhook
-            if 'webhook' in flow:
-                hook = flow.get('webhook', {})
-                namesp = names_pool.search([('name', '=', hook.get('namespace'))])
+            hook = flow.get('webhook', {})
+            _logger.info('========================== hook: %s', hook)
+            namesp = names_pool.search([('name', '=', hook.get('namespace'))])
+            if namesp:
                 domain = [('name', '=', hook.get('name')),
                           ('namespace', '=', namesp[0].id)]
                 rc = hook_pool.search(domain)
