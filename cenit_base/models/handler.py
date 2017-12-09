@@ -112,9 +112,9 @@ class CenitHandler(models.TransientModel):
 
                         vals[field.name].append(tup)
                 elif field.line_cardinality == '2one':
-                    _logger.error("Logging: model 1 : %s - %s ", field.name, field.line_cardinality)
+                    _logger.error("Logging: model 1 : %s - %s  - %s", field.name, field.reference.name, field.reference.cenit_root)
                     x = params.get(field.value, {})
-                    rel_ids = self.push(x, field.reference.name)
+                    rel_ids = self.push(x, field.reference.cenit_root)
                     _logger.error("Logging: model 2 : %s - %s ", field.name, rel_ids)
                     vals[field.name] = rel_ids and rel_ids[0] or False
             elif field.line_type == 'reference':
