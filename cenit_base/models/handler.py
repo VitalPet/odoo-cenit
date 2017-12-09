@@ -99,6 +99,7 @@ class CenitHandler(models.TransientModel):
                 if params.get(field.value, False):
                     vals[field.name] = checker(params[field.value])
             elif field.line_type == 'model':
+                _logger.error("Logging: model : %s - %s ", field.name, params.get(field.value, {}))
                 if field.line_cardinality == '2many':
                     vals[field.name] = []
                     for x in params.get(field.value, []):
@@ -111,8 +112,10 @@ class CenitHandler(models.TransientModel):
 
                         vals[field.name].append(tup)
                 elif field.line_cardinality == '2one':
+                    _logger.error("Logging: model 1 : %s - %s ", field.name, field.line_cardinality)
                     x = params.get(field.value, {})
                     rel_ids = self.push(x, field.reference.name)
+                    _logger.error("Logging: model 2 : %s - %s ", field.name, rel_ids)
                     vals[field.name] = rel_ids and rel_ids[0] or False
             elif field.line_type == 'reference':
                 vals[field.name] = self.find_reference(match, field, params)
