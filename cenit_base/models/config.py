@@ -97,6 +97,10 @@ class CenitSettings (models.TransientModel):
         help=""
     )
 
+    cenit_chase = fields.Boolean('Chase',
+        help=""
+    )
+
 
     @api.multi
     def set_default_cenit_vetzip(self):
@@ -288,6 +292,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'openvpms'})
             if obj.cenit_ultipro:
                 installer.install_collection({'name': 'ultipro'})
+            if obj.cenit_chase:
+                installer.install_collection({'name': 'chase'})
 
 
 class CenitAccountSettings(models.TransientModel):

@@ -98,6 +98,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_ultipro" />
                             </div>
+                            <div name="cenit_chase">
+                                <field name="cenit_chase"
+                                       class="oe_inline" />
+                                <label for="cenit_chase" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />
