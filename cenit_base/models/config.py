@@ -122,6 +122,13 @@ class CenitSettings (models.TransientModel):
         Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
         for config in self:
             Values.set_default('cenit.hub.settings', 'cenit_ultipro', config.cenit_ultipro)
+            
+    @api.multi
+    def set_default_cenit_chase(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_chase', config.cenit_chase)
 
     ############################################################################
     # Default values getters
