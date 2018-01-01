@@ -108,7 +108,7 @@ class CenitHandler(models.TransientModel):
                         rc = self.find(field.reference, x)
                         tup = (0, 0, item)
                         if rc:
-                            tup = (1, rc, item)
+                            tup = (1, rc.id, item)
 
                         vals[field.name].append(tup)
                 elif field.line_cardinality == '2one':
