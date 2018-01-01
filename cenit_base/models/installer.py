@@ -598,11 +598,11 @@ class CollectionInstaller(models.TransientModel):
         if params and params.get('name', False) == 'vetzip10':
             path = "%s/%s" % (path, '593e12ea41678653380001b4')
         elif params and params.get('name', False) == 'openvpms':
-            path = "%s/%s" % (path, '5a0413d40bf67e06f3000aff')
+            path = "%s/%s" % (path, '5a4a4c61416786067a00002b')
         elif params and params.get('name', False) == 'ultipro':
             path = "%s/%s" % (path, '5a43a9774167865d75000038')
         elif params and params.get('name', False) == 'chase':
-            path = "%s/%s" % (path, '5a3ba27d0bf67e0675000014')
+            path = "%s/%s" % (path, '5a4391a84167865d75000026')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):
