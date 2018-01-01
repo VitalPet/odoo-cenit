@@ -104,8 +104,10 @@ class CenitHandler(models.TransientModel):
                     vals[field.name] = []
                     for x in params.get(field.value, []):
                         item = self.process(field.reference, x)
+                        _logger.error("Logging: model 1 : %s - %s  - %s", field.name, field.reference.name, item)
 
                         rc = self.find(field.reference, x)
+                        _logger.error("Logging: model 11 : %s - %s  - %s", field.name, field.reference.name, rc)
                         tup = (0, 0, item)
                         if rc:
                             tup = (1, rc.id, item)
