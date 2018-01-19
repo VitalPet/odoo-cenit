@@ -96,8 +96,12 @@ class CenitSettings (models.TransientModel):
     cenit_ultipro = fields.Boolean('UltiPro',
         help=""
     )
-
+    
     cenit_chase = fields.Boolean('Chase',
+        help=""
+    )
+
+    cenit_vitalpet = fields.Boolean('Vitalpet',
         help=""
     )
 
@@ -129,6 +133,13 @@ class CenitSettings (models.TransientModel):
         Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
         for config in self:
             Values.set_default('cenit.hub.settings', 'cenit_chase', config.cenit_chase)
+            
+    @api.multi
+    def set_default_cenit_vitalpet(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_vitalpet', config.cenit_vitalpet)
 
     ############################################################################
     # Default values getters
@@ -301,6 +312,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'ultipro'})
             if obj.cenit_chase:
                 installer.install_collection({'name': 'chase'})
+            if obj.cenit_vitalpet:
+                installer.install_collection({'name': 'vitalpet'})
 
 
 class CenitAccountSettings(models.TransientModel):

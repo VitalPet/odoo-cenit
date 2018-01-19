@@ -103,6 +103,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_chase" />
                             </div>
+                            <div name="cenit_vitalpet">
+                                <field name="cenit_vitalpet"
+                                       class="oe_inline" />
+                                <label for="cenit_vitalpet" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />
