@@ -108,6 +108,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_vitalpet" />
                             </div>
+                            <div name="cenit_caller_insight">
+                                <field name="cenit_caller_insight"
+                                       class="oe_inline" />
+                                <label for="cenit_caller_insight" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />

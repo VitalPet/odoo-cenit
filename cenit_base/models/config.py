@@ -104,6 +104,10 @@ class CenitSettings (models.TransientModel):
     cenit_vitalpet = fields.Boolean('Vitalpet',
         help=""
     )
+    
+    cenit_caller_insight = fields.Boolean('Caller Insight',
+        help=""
+    )
 
 
     @api.multi
@@ -140,6 +144,13 @@ class CenitSettings (models.TransientModel):
         Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
         for config in self:
             Values.set_default('cenit.hub.settings', 'cenit_vitalpet', config.cenit_vitalpet)
+            
+    @api.multi
+    def set_default_cenit_caller_insight(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_caller_insight', config.cenit_caller_insight)
 
     ############################################################################
     # Default values getters
@@ -314,6 +325,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'chase'})
             if obj.cenit_vitalpet:
                 installer.install_collection({'name': 'vitalpet'})
+            if obj.cenit_caller_insight:
+                installer.install_collection({'name': 'caller_insight'})
 
 
 class CenitAccountSettings(models.TransientModel):
