@@ -326,7 +326,7 @@ class CenitSettings (models.TransientModel):
             if obj.cenit_vitalpet:
                 installer.install_collection({'name': 'vitalpet'})
             if obj.cenit_caller_insight:
-                installer.install_collection({'name': 'caller_insight'})
+                installer.install_collection({'name': 'callerinsight'})
 
 
 class CenitAccountSettings(models.TransientModel):
