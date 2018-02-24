@@ -100,7 +100,7 @@ class CenitApi(models.AbstractModel):
         cenit_url = config.get('cenit_url')
         icp = self.env["ir.config_parameter"]
         base_url = icp.get_param('web.base.url', default='')
-        if cenit_url == 'https://cenit.vitalpet.net' and base_url.find('vetzip.vitalpet.net/') == -1:
+        if cenit_url == 'https://cenit.vitalpet.net' and base_url.find('vetzip.vitalpet.net') == -1:
             _logger.error("Error trying to connect to Cenit Live, update your cenit url linked to your environment")
             raise exceptions.AccessError("Error trying to connect to Cenit Live, update your cenit url linked to your environment!")
             
