@@ -59,7 +59,7 @@ class CenitHandler(models.TransientModel):
                     continue
                 to_search.append((entry.name, '=', value))
 
-            objs = model_obj.search(to_search)
+            objs = model_obj.sudo().search(to_search)
             if objs:
                 return objs[0]
 
@@ -69,9 +69,9 @@ class CenitHandler(models.TransientModel):
     def find_reference(self, match, field, params):
         f = [x for x in match.model.field_id if x.name == field.name][0]
 
-        model_pool = self.env["ir.model"]
+        model_pool = self.env["ir.model"].sudo()
         model = model_pool.search([('model', '=', f.relation)])[0]
-        model_obj = self.env[model.model]
+        model_obj = self.env[model.model].sudo()
 
         op = "="
         value = params.get(field.value, False)
@@ -145,7 +145,7 @@ class CenitHandler(models.TransientModel):
 
     @api.model
     def get_match(self, root):
-        wdt = self.env['cenit.data_type']
+        wdt = self.env['cenit.data_type'].sudo()
         matching = wdt.search([('cenit_root', '=', root)])
 
         if matching:
@@ -170,7 +170,7 @@ class CenitHandler(models.TransientModel):
                 if not vals:
                     continue
 
-                obj = model_obj.create(vals)
+                obj = model_obj.sudo().create(vals)
                 if not obj:
                     continue
                 _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
@@ -195,7 +195,7 @@ class CenitHandler(models.TransientModel):
             if obj:
                 vals = self.process(match, p)
                 vals = self.trim(match, obj, vals)
-                obj.write(vals)
+                obj.sudo().write(vals)
                 obj_ids.append(obj.id)
                 _logger.error("Logging: Update : %s - %s", match.model.model, obj.id)
                 self.log('Update', match.model.id,record_id=obj.id)
@@ -227,7 +227,7 @@ class CenitHandler(models.TransientModel):
     @api.model
     def log(self, action, model, status='Success', record_id=False, msg=''):
         if 'vitalpet_mapping' in self.env.registry._init_modules:
-            res = self.env['pims.sync.log'].create({'action': action,
+            res = self.env['pims.sync.log'].sudo().create({'action': action,
                                                 'model': model,
                                                 'status': status,
                                                 'record_global_id': record_id,
