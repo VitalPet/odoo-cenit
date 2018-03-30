@@ -168,7 +168,9 @@ class CenitHandler(models.TransientModel):
         for p in params:
             obj = self.find(match, p)
             if not obj:
+                _logger.error("Logging: add obj null : %s - %s", match.model.model, p)
                 vals = self.process(match, p)
+                _logger.error("Logging: add vals : %s - %s", match.model.model, vals)
                 if not vals:
                     continue
 
