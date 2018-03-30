@@ -54,12 +54,14 @@ class CenitHandler(models.TransientModel):
                 checker = self._get_checker(model_obj, entry.name)
                 _logger.error("new params: %s - %s", params, entry.value)
                 value = checker(params.get(entry.value, False))
+                _logger.error("new entry.value: %s - %s", entry.value, value)
 
                 if not value:
                     continue
                 to_search.append((entry.name, '=', value))
 
             objs = model_obj.sudo().search(to_search)
+            _logger.error("new objs: %s - %s", entry.value, objs)
             if objs:
                 return objs[0]
 
