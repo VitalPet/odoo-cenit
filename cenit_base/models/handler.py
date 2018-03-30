@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import sys
 
 from odoo import models, api
 
@@ -177,6 +178,8 @@ class CenitHandler(models.TransientModel):
                     obj = model_obj.sudo().create(vals)
                 except:
                     _logger.error("############## Logging: Create Error : %s - %s ###################", match.model.model, vals)
+                    e = sys.exc_info()[0]
+                    _logger.error("############## Logging: Create Error : %s  ###################", e)
                 if not obj:
                     continue
                 _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
