@@ -179,7 +179,7 @@ class CenitHandler(models.TransientModel):
                 except:
                     _logger.error("############## Logging: Create Error : %s - %s ###################", match.model.model, vals)
                     e = sys.exc_info()[0]
-                    _logger.error("############## Logging: Create Error : %s  ###################", e)
+                    _logger.error("############## Logging: Create Error : %s - %s  ###################", e, e.message)
                 if not obj:
                     continue
                 _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
