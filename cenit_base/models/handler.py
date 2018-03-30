@@ -173,8 +173,10 @@ class CenitHandler(models.TransientModel):
                 _logger.error("Logging: add vals : %s - %s", match.model.model, vals)
                 if not vals:
                     continue
-
-                obj = model_obj.sudo().create(vals)
+                try:
+                    obj = model_obj.sudo().create(vals)
+                except:
+                    _logger.error("############## Logging: Create Error : %s - %s ###################", match.model.model, vals)
                 if not obj:
                     continue
                 _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
