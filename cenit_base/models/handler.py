@@ -167,27 +167,29 @@ class CenitHandler(models.TransientModel):
 
         obj_ids = []
         for p in params:
-            obj = self.find(match, p)
-            if not obj:
-                _logger.error("Logging: add obj null : %s - %s", match.model.model, p)
-                vals = self.process(match, p)
-                _logger.error("Logging: add vals : %s - %s", match.model.model, vals)
-                if not vals:
-                    continue
-                try:
-                    obj = model_obj.sudo().create(vals)
-                except Exception as e:
-                    _logger.error("############## Logging: Create Error : %s  ###################", match.model.model)
-                    if hasattr(e, 'message'):
-                        _logger.error("############## Logging: Create Error : %s - %s  ###################", e, e.message)
-                    else:
-                        _logger.error("############## Logging: Create Error : %s  ###################", e)
+            try:
+                obj = self.find(match, p)
                 if not obj:
-                    continue
-                _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
-                self.log('Create', match.model.id,record_id=obj.id)
-
-            obj_ids.append(obj.id)
+                    _logger.error("Logging: add obj null : %s - %s", match.model.model, p)
+                    vals = self.process(match, p)
+                    _logger.error("Logging: add vals : %s - %s", match.model.model, vals)
+                    if not vals:
+                        continue
+                    
+                        obj = model_obj.sudo().create(vals)
+                    if not obj:
+                        continue
+                    _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
+                    self.log('Create', match.model.id,record_id=obj.id)
+    
+                obj_ids.append(obj.id)
+            
+            except Exception as e:
+                _logger.error("############## Logging: Create Error : %s  ###################", match.model.model)
+                if hasattr(e, 'message'):
+                    _logger.error("############## Logging: Create Error : %s - %s  ###################", e, e.message)
+                else:
+                    _logger.error("############## Logging: Create Error : %s  ###################", e)
         return obj_ids
 
     @api.model
@@ -202,14 +204,22 @@ class CenitHandler(models.TransientModel):
 
         obj_ids = []
         for p in params:
-            obj = self.find(match, p)
-            if obj:
-                vals = self.process(match, p)
-                vals = self.trim(match, obj, vals)
-                obj.sudo().write(vals)
-                obj_ids.append(obj.id)
-                _logger.error("Logging: Update : %s - %s", match.model.model, obj.id)
-                self.log('Update', match.model.id,record_id=obj.id)
+            try:
+                obj = self.find(match, p)
+                if obj:
+                    vals = self.process(match, p)
+                    vals = self.trim(match, obj, vals)
+                    obj.sudo().write(vals)
+                    obj_ids.append(obj.id)
+                    _logger.error("Logging: Update : %s - %s", match.model.model, obj.id)
+                    self.log('Update', match.model.id,record_id=obj.id)
+            
+            except Exception as e:
+                _logger.error("############## Logging: Update Error : %s  ###################", match.model.model)
+                if hasattr(e, 'message'):
+                    _logger.error("############## Logging: Update Error : %s - %s  ###################", e, e.message)
+                else:
+                    _logger.error("############## Logging: Update Error : %s  ###################", e)
 
         return obj_ids
 
