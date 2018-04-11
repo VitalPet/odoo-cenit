@@ -63,6 +63,10 @@ class CenitHandler(models.TransientModel):
 
             objs = model_obj.sudo().search(to_search)
             _logger.error("new objs: %s - %s", entry.value, objs)
+            if not objs and 'active' in model_obj._fields:
+                to_search.append(("active", "=", False))
+            objs = model_obj.sudo().search(to_search)
+            _logger.error("new objs 1: %s - %s", entry.value, objs)
             if objs:
                 return objs[0]
 
