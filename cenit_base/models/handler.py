@@ -190,6 +190,7 @@ class CenitHandler(models.TransientModel):
                     _logger.error("############## Logging: Create Error : %s - %s  ###################", e, e.message)
                 else:
                     _logger.error("############## Logging: Create Error : %s  ###################", e)
+                self.env.cr.rollback()
         return obj_ids
 
     @api.model
@@ -220,6 +221,7 @@ class CenitHandler(models.TransientModel):
                     _logger.error("############## Logging: Update Error : %s - %s  ###################", e, e.message)
                 else:
                     _logger.error("############## Logging: Update Error : %s  ###################", e)
+                self.env.cr.rollback()
 
         return obj_ids
 
