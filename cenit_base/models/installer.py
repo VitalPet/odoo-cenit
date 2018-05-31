@@ -607,6 +607,8 @@ class CollectionInstaller(models.TransientModel):
             path = "%s/%s" % (path, '598b1adf41678668d700201a')
         elif params and params.get('name', False) == 'callerinsight':
             path = "%s/%s" % (path, '5a9165fb4167860672013641')
+        elif params and params.get('name', False) == 'twilio':
+            path = "%s/%s" % (path, '5ad9bf330bf67e066e0004ca')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):
