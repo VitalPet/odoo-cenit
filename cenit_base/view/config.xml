@@ -113,6 +113,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_caller_insight" />
                             </div>
+                            <div name="cenit_background_chex">
+                                <field name="cenit_background_chex"
+                                       class="oe_inline" />
+                                <label for="cenit_background_chex" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />
