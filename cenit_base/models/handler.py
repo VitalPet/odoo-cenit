@@ -190,10 +190,7 @@ class CenitHandler(models.TransientModel):
             
             except Exception as e:
                 _logger.error("############## Logging: Create Error : %s  ###################", match.model.model)
-                if hasattr(e, 'message'):
-                    _logger.error("############## Logging: Create Error : %s - %s  ###################", e, e.message)
-                else:
-                    _logger.error("############## Logging: Create Error : %s  ###################", e)
+                _logger.exception(e)
                 self.env.cr.rollback()
         return obj_ids
 
@@ -221,10 +218,7 @@ class CenitHandler(models.TransientModel):
             
             except Exception as e:
                 _logger.error("############## Logging: Update Error : %s  ###################", match.model.model)
-                if hasattr(e, 'message'):
-                    _logger.error("############## Logging: Update Error : %s - %s  ###################", e, e.message)
-                else:
-                    _logger.error("############## Logging: Update Error : %s  ###################", e)
+                _logger.exception(e)
                 self.env.cr.rollback()
 
         return obj_ids
