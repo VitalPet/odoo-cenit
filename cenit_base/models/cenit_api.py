@@ -199,6 +199,7 @@ class CenitApi(models.AbstractModel):
         try:
             _logger.info("[DEL] %s ? {%s}", url, headers)
             # r = requests.delete(url, headers=headers)
+            return True
         except Exception as e:
             _logger.error(e)
             raise exceptions.AccessError("Error trying to connect to Cenit.")
