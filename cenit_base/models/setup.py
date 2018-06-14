@@ -672,7 +672,9 @@ class CenitFlow (models.Model):
 
         conn = self.connection_role.connections and \
             self.connection_role.connections[0]
-        my_conn = conn.url == my_url
+        conn_url = conn.url.split(':')[1]
+        #my_conn = conn.url == my_url
+        my_conn = my_url.find(conn_url) >= 0
 
         rc = {
             ('get', True): 'send',
