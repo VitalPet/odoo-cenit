@@ -612,7 +612,9 @@ class CollectionInstaller(models.TransientModel):
         elif params and params.get('name', False) == 'twilio':
             path = "%s/%s" % (path, '5ad9bf330bf67e066e0004ca')
         elif params and params.get('name', False) == 'background_chex':
-            path = "%s/%s" % (path, '5b7c7e3b416786069e01ed0c')
+            path = "%s/%s" % (path, '5b115ccb0bf67e2e440000ba')
+        elif params and params.get('name', False) == 'symmetry':
+            path = "%s/%s" % (path, '5b8926710bf67e06bc0003bf')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):

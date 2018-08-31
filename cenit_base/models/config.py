@@ -112,6 +112,10 @@ class CenitSettings (models.TransientModel):
     cenit_background_chex = fields.Boolean('Background Chex',
         help=""
     )
+    
+    cenit_symmetry = fields.Boolean('Symmetry',
+        help=""
+    )
 
 
     @api.multi
@@ -162,6 +166,13 @@ class CenitSettings (models.TransientModel):
         Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
         for config in self:
             Values.set_default('cenit.hub.settings', 'cenit_background_chex', config.cenit_background_chex)
+            
+    @api.multi
+    def set_default_cenit_symmetry(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_symmetry', config.cenit_symmetry)
 
     ############################################################################
     # Default values getters
@@ -340,6 +351,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'callerinsight'})
             if obj.cenit_background_chex:
                 installer.install_collection({'name': 'background_chex'})
+            if obj.cenit_symmetry:
+                installer.install_collection({'name': 'symmetry'})
 
 
 class CenitAccountSettings(models.TransientModel):

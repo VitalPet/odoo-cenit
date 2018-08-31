@@ -118,6 +118,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_background_chex" />
                             </div>
+                            <div name="cenit_symmetry">
+                                <field name="cenit_symmetry"
+                                       class="oe_inline" />
+                                <label for="cenit_symmetry" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />
