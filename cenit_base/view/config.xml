@@ -123,6 +123,11 @@
                                        class="oe_inline" />
                                 <label for="cenit_symmetry" />
                             </div>
+                            <div name="cenit_vetport">
+                                <field name="cenit_vetport"
+                                       class="oe_inline" />
+                                <label for="cenit_vetport" />
+                            </div>
                         </group>
                         <button string="Update collections" type="object" name="update_collection"
                                  icon="/web/static/src/img/icons/gtk-refresh.png" />

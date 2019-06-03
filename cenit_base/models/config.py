@@ -116,6 +116,10 @@ class CenitSettings (models.TransientModel):
     cenit_symmetry = fields.Boolean('Symmetry',
         help=""
     )
+    
+    cenit_vetport = fields.Boolean('VetPort API',
+        help=""
+    )
 
 
     @api.multi
@@ -173,6 +177,13 @@ class CenitSettings (models.TransientModel):
         Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
         for config in self:
             Values.set_default('cenit.hub.settings', 'cenit_symmetry', config.cenit_symmetry)
+            
+    @api.multi
+    def set_default_cenit_vetport(self):
+        check = self.env.user.has_group('base.group_system')
+        Values = check and self.env['ir.values'].sudo() or self.env['ir.values']
+        for config in self:
+            Values.set_default('cenit.hub.settings', 'cenit_vetport', config.cenit_vetport)
 
     ############################################################################
     # Default values getters
@@ -353,6 +364,8 @@ class CenitSettings (models.TransientModel):
                 installer.install_collection({'name': 'background_chex'})
             if obj.cenit_symmetry:
                 installer.install_collection({'name': 'symmetry'})
+            if obj.cenit_vetport:
+                installer.install_collection({'name': 'vetport'})
 
 
 class CenitAccountSettings(models.TransientModel):
