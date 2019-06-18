@@ -618,7 +618,7 @@ class CollectionInstaller(models.TransientModel):
         elif params and params.get('name', False) == 'slack':
             path = "%s/%s" % (path, '5cd2d63e41678606c1019770')
         elif params and params.get('name', False) == 'vetport':
-            path = "%s/%s" % (path, '5cf186e60bf67e06bf000a0b')
+            path = "%s/%s" % (path, '5d08a2c441678649950093d9')
 
         rc = cenit_api.get(path)
         if isinstance(rc, list):
