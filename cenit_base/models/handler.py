@@ -191,7 +191,7 @@ class CenitHandler(models.TransientModel):
             except Exception as e:
                 _logger.error("############## Logging: Create Error : %s  ###################", match.model.model)
                 _logger.exception(e)
-                self.env.cr.rollback()
+                #self.env.cr.rollback()
         return obj_ids
 
     @api.model
@@ -219,7 +219,7 @@ class CenitHandler(models.TransientModel):
             except Exception as e:
                 _logger.error("############## Logging: Update Error : %s  ###################", match.model.model)
                 _logger.exception(e)
-                self.env.cr.rollback()
+                #self.env.cr.rollback()
 
         return obj_ids
 
@@ -242,10 +242,10 @@ class CenitHandler(models.TransientModel):
                 ids = self.add(p, m_name)
 
             obj_ids.extend(ids)
-            commit = commit + 1
-            if commit > 10:
-                self.env.cr.commit()
-                commit = 0
+            #commit = commit + 1
+            #if commit > 10:
+            #    self.env.cr.commit()
+            #    commit = 0
 
         return obj_ids
 
