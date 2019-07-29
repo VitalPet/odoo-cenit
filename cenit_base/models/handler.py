@@ -53,20 +53,20 @@ class CenitHandler(models.TransientModel):
             to_search = []
             for entry in fp:
                 checker = self._get_checker(model_obj, entry.name)
-                _logger.error("new params: %s - %s", params, entry.value)
+                #_logger.error("new params: %s - %s", params, entry.value)
                 value = checker(params.get(entry.value, False))
-                _logger.error("new entry.value: %s - %s", entry.value, value)
+                #_logger.error("new entry.value: %s - %s", entry.value, value)
 
                 if not value:
                     continue
                 to_search.append((entry.name, '=', value))
 
             objs = model_obj.sudo().search(to_search)
-            _logger.error("new objs: %s - %s", entry.value, objs)
+            #_logger.error("new objs: %s - %s", entry.value, objs)
             if not objs and 'active' in model_obj._fields:
                 to_search.append(("active", "=", False))
             objs = model_obj.sudo().search(to_search)
-            _logger.error("new objs 1: %s - %s", entry.value, objs)
+            #_logger.error("new objs 1: %s - %s", entry.value, objs)
             if objs:
                 return objs[0]
 
@@ -106,25 +106,25 @@ class CenitHandler(models.TransientModel):
                 if params.get(field.value, False):
                     vals[field.name] = checker(params[field.value])
             elif field.line_type == 'model':
-                _logger.error("Logging: model : %s - %s ", field.name, params.get(field.value, {}))
+                #_logger.error("Logging: model : %s - %s ", field.name, params.get(field.value, {}))
                 if field.line_cardinality == '2many':
                     vals[field.name] = []
                     for x in params.get(field.value, []):
                         item = self.process(field.reference, x)
-                        _logger.error("Logging: model 1 : %s - %s  - %s", field.name, field.reference.name, item)
+                        #_logger.error("Logging: model 1 : %s - %s  - %s", field.name, field.reference.name, item)
 
                         rc = self.find(field.reference, x)
-                        _logger.error("Logging: model 11 : %s - %s  - %s", field.name, field.reference.name, rc)
+                        #_logger.error("Logging: model 11 : %s - %s  - %s", field.name, field.reference.name, rc)
                         tup = (0, 0, item)
                         if rc:
                             tup = (1, rc.id, item)
 
                         vals[field.name].append(tup)
                 elif field.line_cardinality == '2one':
-                    _logger.error("Logging: model 1 : %s - %s  - %s", field.name, field.reference.name, field.reference.cenit_root)
+                    #_logger.error("Logging: model 1 : %s - %s  - %s", field.name, field.reference.name, field.reference.cenit_root)
                     x = params.get(field.value, {})
                     rel_ids = self.push(x, field.reference.cenit_root)
-                    _logger.error("Logging: model 2 : %s - %s ", field.name, rel_ids)
+                    #_logger.error("Logging: model 2 : %s - %s ", field.name, rel_ids)
                     vals[field.name] = rel_ids and rel_ids[0] or False
             elif field.line_type == 'reference':
                 vals[field.name] = self.find_reference(match, field, params)
@@ -175,16 +175,16 @@ class CenitHandler(models.TransientModel):
             try:
                 obj = self.find(match, p)
                 if not obj:
-                    _logger.error("Logging: add obj null : %s - %s", match.model.model, p)
+                    _logger.info("Logging: add obj null : %s - %s", match.model.model, p)
                     vals = self.process(match, p)
-                    _logger.error("Logging: add vals : %s - %s", match.model.model, vals)
+                    #_logger.info("Logging: add vals : %s - %s", match.model.model, vals)
                     if not vals:
                         continue
                     
                     obj = model_obj.sudo().create(vals)
                     if not obj:
                         continue
-                    _logger.error("Logging: Create : %s - %s", match.model.model, obj.id)
+                    _logger.info("Logging: Create : %s - %s", match.model.model, obj.id)
                     self.log('Create', match.model.id,record_id=obj.id)
     
                 obj_ids.append(obj.id)
@@ -219,7 +219,7 @@ class CenitHandler(models.TransientModel):
                     vals = self.trim(match, obj, vals)
                     obj.sudo().write(vals)
                     obj_ids.append(obj.id)
-                    _logger.error("Logging: Update : %s - %s", match.model.model, obj.id)
+                    _logger.info("Logging: Update : %s - %s", match.model.model, obj.id)
                     self.log('Update', match.model.id,record_id=obj.id)
                     commit = commit + 1
                     if commit > 10:
